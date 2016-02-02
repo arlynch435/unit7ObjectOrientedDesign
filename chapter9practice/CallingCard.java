@@ -1,11 +1,19 @@
 public class CallingCard extends Card
 {
     /** description of instance variable x (add comment for each instance variable) */
-    private String idNumber;
+    private String cardNumber;
+    private int pin;
 
-    public CallingCard(String n, String id)
+    public CallingCard(String n, String cNumber, int code)
    {  
       super(n);
-      idNumber = id;
+      this.cardNumber=cNumber;
+      this.pin=code;
+   }
+   public String format()
+   {
+       String newPhrase=super.format();
+       newPhrase+=" Card number: "+this.cardNumber+" PIN number: "+this.pin;
+       return newPhrase;
    }
 }

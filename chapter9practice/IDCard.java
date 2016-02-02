@@ -6,6 +6,12 @@ public class IDCard extends Card
     public IDCard(String n, String id)
    {  
       super(n);
-      idNumber = id;
+      this.idNumber = id;
+   }
+   public String format()
+   {
+       String newPhrase=super.format();
+       newPhrase+=" ID number: "+this.idNumber;
+       return newPhrase;
    }
 }
