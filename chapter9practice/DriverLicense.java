@@ -25,4 +25,14 @@ public class DriverLicense extends Card
       else
        return false;
    }
+   public String getCardType()
+   {
+       return "Driver License";
+    }
+   public String toString()
+   {
+       String prim=super.toString();
+       prim+="[expiration year="+this.expYear+"]";
+       return prim;
+    }
 }

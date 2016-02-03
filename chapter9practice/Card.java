@@ -21,9 +21,17 @@ public class Card
    {
       return false;
    }
+   public String getCardType()
+   {
+       return "Card";
+    }
 
    public String format()
    {
       return "Card holder: " + name;
    }
+   public String toString()
+   {
+       return this.getCardType()+"[name="+this.name+"]";
+    }
 }

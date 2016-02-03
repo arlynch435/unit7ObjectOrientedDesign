@@ -10,6 +10,16 @@ public class CallingCard extends Card
       this.cardNumber=cNumber;
       this.pin=code;
    }
+   public String getCardType()
+   {
+       return "CallingCard";
+    }
+   public String toString()
+   {
+       String prim=super.toString();
+       prim+="[number="+this.cardNumber+"]"+"[pin="+this.pin+"]";
+       return prim;
+    }
    public String format()
    {
        String newPhrase=super.format();
