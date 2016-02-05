@@ -36,5 +36,6 @@ public class IDCard extends Card
         //third, check if the instance variables of this object and the other are equal
         return isEqual&&this.idNumber.equals(otherIDCard.idNumber);
       }
+      return false;
     }
 }

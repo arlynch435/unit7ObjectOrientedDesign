@@ -26,4 +26,18 @@ public class CallingCard extends Card
        newPhrase+=" Card number: "+this.cardNumber+" PIN number: "+this.pin;
        return newPhrase;
    }
+   public boolean equals(Object other)
+   {
+      //check if this opject and other object are same class. 
+       if(this.getClass()==other.getClass())
+       {
+        //If so cast object to same class
+        CallingCard otherCall=(CallingCard)other;
+        //second check if superclass determines that this object and the other are equal
+        boolean isEqual=super.equals(otherCall);
+        //third, check if the instance variables of this object and the other are equal
+        return isEqual&&this.cardNumber.equals(otherCall.cardNumber)&&this.pin==otherCall.pin;
+      }
+      return false;
+    }
 }

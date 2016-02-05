@@ -25,6 +25,11 @@ public class Card
    {
        return "Card";
     }
+   public boolean equals(Object otherObject)
+   {
+       Card other=(Card)otherObject;
+       return this.getName()==other.getName();
+    }
 
    public String format()
    {
