@@ -36,5 +36,14 @@ public class TriangleComponent extends JComponent
             this.arrayPos=0;
         }
     }
+    public void makeDot()
+    {
+    }
+    public void makeLine()
+    {
+    }
+    public void clear()
+    {
+    }
 
 }

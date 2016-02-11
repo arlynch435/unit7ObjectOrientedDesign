@@ -14,8 +14,8 @@ public class TriangleViewer
         this.frame=new JFrame();
         this.panel= new JPanel();
         ClickListener listener=new ClickListener();
-        //TriangleComponent triangle=new TriangleComponent();
-        //this.panel.add(triangle);
+        TriangleComponent triangle=new TriangleComponent();
+        this.panel.add(triangle);
         this.frame.add(this.panel);
         this.frame.setSize(FRAME_WIDTH,FRAME_HEIGHT);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,16 +43,22 @@ public class TriangleViewer
             if (this.count<4)
           {
               this.count++;
+              this.triangle.addPos(event.getX(),event.getY());
               if (this.count==1)
               {
-                  triangle.makeDot(
+                  triangle.makeDot();
+                }
+              else
+              {
+                  triangle.makeDot();
+                  triangle.makeLine();
                 }
             }
           else
           {
               this.count=1;
+              triangle.clear();
             }
-          triangle.addPos(event.getX(),event.getY();
            }
         public void mouseEntered(MouseEvent event)
          {// Called when the mouse enters a component
