@@ -8,16 +8,14 @@ public class TriangleViewer
     private static final int FRAME_WIDTH=600;
     private static final int FRAME_HEIGHT=800;
     private JFrame frame;
-    private JPanel panel;
+    //private JPanel panel;
     private TriangleComponent triangle;
     public TriangleViewer()
     {
         this.frame=new JFrame();
-        this.panel= new JPanel();
         ClickListener listener=new ClickListener();
         this.triangle=new TriangleComponent();
-        this.panel.add(triangle);
-        this.frame.add(this.panel);
+        this.frame.add(triangle);
         this.frame.setSize(FRAME_WIDTH,FRAME_HEIGHT);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setVisible(true);
@@ -47,12 +45,16 @@ public class TriangleViewer
               triangle.addPos(event.getX(),event.getY());
               if (this.count==1)
               {
-                  triangle.makeDot();
+                  triangle.makeDot(count-1);
                 }
               else
               {
-                  triangle.makeDot();
-                  triangle.makeLine();
+                  triangle.makeDot(count-1);
+                  triangle.makeLine(count-2,count-1);
+                  if (count==3)
+                  {
+                      triangle.makeLine(0,count-1);
+                    }
                 }
             }
           else

@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import javax.swing.JComponent;
 /**
  * Write a description of class TriangleComponent here.
@@ -13,6 +15,7 @@ public class TriangleComponent extends JComponent
     private int[] xPositions;
     private int[] yPositions;
     private int arrayPos;
+    private Graphics2D g2;
 
     /**
      * Default constructor for objects of class TriangleComponent
@@ -20,8 +23,13 @@ public class TriangleComponent extends JComponent
     public TriangleComponent()
     {
         // initialise instance variables
+        //this.g2=new Graphics2D();
         this.xPositions = new int[3];
         this.yPositions= new int[3];
+    }
+    public void paintComponent (Graphics g)
+    {
+        this.g2=(Graphics2D) g;
     }
     public void addPos(int x, int y)
     {
@@ -36,11 +44,16 @@ public class TriangleComponent extends JComponent
             this.arrayPos=0;
         }
     }
-    public void makeDot()
+    public void makeDot(int point)
     {
+        Ellipse2D.Double circle=new Ellipse2D.Double(this.xPositions[point],this.yPositions[point],10,10);
+        g2.draw(circle);
     }
-    public void makeLine()
+    public void makeLine(int a, int b)
     {
+        Line2D.Double line=new Line2D.Double(this.xPositions[a],this.yPositions[a],
+                                                this.xPositions[b],this.yPositions[b]);
+        g2.draw(line);
     }
     public void clear()
     {
