@@ -16,37 +16,52 @@ public class TriangleComponent extends JComponent
     private int[] yPositions;
     private int arrayPos;
     private Graphics2D g2;
-
     /**
      * Default constructor for objects of class TriangleComponent
      */
     public TriangleComponent()
     {
         // initialise instance variables
-        //this.g2=new Graphics2D();
         this.xPositions = new int[3];
         this.yPositions= new int[3];
+        this.arrayPos=0;
     }
     public void paintComponent (Graphics g)
     {
         this.g2=(Graphics2D) g;
+        if (this.arrayPos==1)
+        {
+            this.makeDot(0);
+        }
+        if (this.arrayPos==2)
+        {
+            this.makeDot(0);
+            this.makeDot(1);
+            this.makeLine(0,1);
+        }
+        if (this.arrayPos==3)
+        {
+            this.makeDot(0);
+            this.makeDot(1);
+            this.makeDot(2);
+            this.makeLine(0,1);
+            this.makeLine(0,2);
+            this.makeLine(1,2);
+        }
     }
     public void addPos(int x, int y)
     {
+        if (this.arrayPos<3)
+       {
         this.xPositions[this.arrayPos]=x;
         this.yPositions[this.arrayPos]=y;
-        if (this.arrayPos<3)
-        {
-            this.arrayPos++;
-        }
-        else
-        {
-            this.arrayPos=0;
-        }
+       }
+        this.arrayPos = (this.arrayPos + 1) % 4;
     }
     public void makeDot(int point)
     {
-        Ellipse2D.Double circle=new Ellipse2D.Double(this.xPositions[point],this.yPositions[point],10,10);
+        Ellipse2D.Double circle=new Ellipse2D.Double(this.xPositions[point],
+                                                     this.yPositions[point],5,5);
         g2.draw(circle);
     }
     public void makeLine(int a, int b)
@@ -55,8 +70,4 @@ public class TriangleComponent extends JComponent
                                                 this.xPositions[b],this.yPositions[b]);
         g2.draw(line);
     }
-    public void clear()
-    {
-    }
-
 }
