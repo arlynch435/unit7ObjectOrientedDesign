@@ -30,8 +30,17 @@ public class CircleComponent1 extends JComponent
         this.g2=(Graphics2D) g;
             this.makeCircle();
     }
-    public void add()
+    public void addX(int coord)
     {
+        this.x=coord;
+    }
+    public void addY(int coord)
+    {
+        this.y=coord;
+    }
+    public void addRadius(int length)
+    {
+        this.radius=length;
     }
     public void makeCircle()
     {

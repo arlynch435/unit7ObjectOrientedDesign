@@ -55,8 +55,13 @@ public class TriangleComponent extends JComponent
        {
         this.xPositions[this.arrayPos]=x;
         this.yPositions[this.arrayPos]=y;
+        this.arrayPos++;
        }
-        this.arrayPos = (this.arrayPos + 1) % 4;
+       else
+       {
+           this.arrayPos=0;
+        }
+       
     }
     public void makeDot(int point)
     {

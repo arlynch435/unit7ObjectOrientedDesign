@@ -20,10 +20,10 @@ public class CircleViewer1
     {
         this.frame=new JFrame();
         this.panel= new JPanel();
-        //ClickListener1 listener=new ClickListener1();
+        DoneListener drawListener=new DoneListener();
         this.circle=new CircleComponent1();
-        //this.circle.addActionListener(listener);
         this.draw=new JButton("Draw!");
+        this.draw.addActionListener(drawListener);
         this.input= new JOptionPane();
         this.panel.add(draw);
         this.frame.add(this.panel);
@@ -35,14 +35,12 @@ public class CircleViewer1
     {
         CircleViewer1 view=new CircleViewer1();
     }
-        public class ClickListener implements ActionListener
+        public class DoneListener implements ActionListener
     {
-        
         public void actionPerformed(ActionEvent event)
         {
             circle.repaint();
         }
-    
     }
 
 }
