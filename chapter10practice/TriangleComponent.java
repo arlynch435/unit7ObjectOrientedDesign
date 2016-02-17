@@ -65,8 +65,8 @@ public class TriangleComponent extends JComponent
     }
     public void makeDot(int point)
     {
-        Ellipse2D.Double circle=new Ellipse2D.Double(this.xPositions[point],
-                                                     this.yPositions[point],5,5);
+        Ellipse2D.Double circle=new Ellipse2D.Double(this.xPositions[point]-2.5,
+                                                     this.yPositions[point]-2.5,5,5);
         g2.draw(circle);
     }
     public void makeLine(int a, int b)

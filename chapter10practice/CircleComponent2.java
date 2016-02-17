@@ -8,7 +8,7 @@ import javax.swing.JComponent;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class CircleComponent1 extends JComponent
+public class CircleComponent2 extends JComponent
 {
     /** description of instance variable x (add comment for each instance variable) */
     private int x;
@@ -18,7 +18,7 @@ public class CircleComponent1 extends JComponent
     /**
      * Default constructor for objects of class TriangleComponent
      */
-    public CircleComponent1()
+    public CircleComponent2()
     {
         // initialise instance variables
         this.x = 0;

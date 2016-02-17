@@ -4,7 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-
+import java.awt.geom.Dimension2D;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class CircleViewer1
@@ -25,7 +26,10 @@ public class CircleViewer1
         this.draw=new JButton("Draw!");
         this.draw.addActionListener(drawListener);
         this.input= new JOptionPane();
-        this.panel.add(draw);
+        this.panel.add(this.circle);
+        this.panel.add(this.draw);
+        Dimension circleWin=new Dimension(500,500);
+        this.circle.setPreferredSize(circleWin);
         this.frame.add(this.panel);
         this.frame.setSize(FRAME_WIDTH,FRAME_HEIGHT);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,6 +43,12 @@ public class CircleViewer1
     {
         public void actionPerformed(ActionEvent event)
         {
+            String ansX=input.showInputDialog("Enter your x coordinate: ");
+            circle.addX(Integer.parseInt(ansX));
+            String ansY=input.showInputDialog("Enter your y coordinate: ");
+            circle.addY(Integer.parseInt(ansY));
+            String ansRad=input.showInputDialog("Enter your radius: ");
+            circle.addRadius(Integer.parseInt(ansRad));
             circle.repaint();
         }
     }
