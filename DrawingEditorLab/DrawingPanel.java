@@ -1,10 +1,15 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.util.ArrayList;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.Color;
+import java.awt.Dimension;
 /**
  * Write a description of class DrawingPanel here.
  * 
@@ -17,7 +22,9 @@ public class DrawingPanel extends JPanel
     private SelectListener select;
     private DragListener move;
     private ArrowListener compass;
-    //private ArrayList<Shape> shownShapes;
+    private ArrayList<Shape> shownShapes;
+    private int activeShape;
+    private boolean isShapePicked;
 
     /**
      * Default constructor for objects of class DrawingPanel
@@ -28,14 +35,21 @@ public class DrawingPanel extends JPanel
         this.select=new SelectListener();
         this.move=new DragListener();
         this.compass=new ArrowListener();
-        //this.shownShapes=new ArrayList<Shape>;
+        this.setBackground(Color.WHITE);
+        this.shownShapes=new ArrayList<Shape>();
+        this.activeShape=0;
+        this.isShapePicked=false;
         this.addMouseListener(this.select);
         this.addMouseMotionListener(this.move);
         this.addKeyListener(this.compass);
     }
-    public void getColor()
+    public Color getColor()
+    {   
+    }
+    public Dimension getPreferredSize()
     {
-        
+        Dimension pref= new Dimension(500,500);
+        return pref;
     }
     public void pickColor()
     {
@@ -48,6 +62,28 @@ public class DrawingPanel extends JPanel
     public void addSquare()
     {
         
+    }
+    public void paintComponent(Graphics g)
+    {
+        Graphics2D g2= (Graphics2D) g;
+        if (this.isShapePicked)
+        {
+            Shape active= this.shownShapes.get(this.activeShape);
+            this.shownShapes.remove(this.activeShape);
+            for(int i=this.shownShapes.size()-1;i>=0;i--)
+            {
+                this.shownShapes.get(i).draw(g2,true);
+            }
+            active.draw(g2,false);
+            this.shownShapes.add(active);
+        }
+        else
+        {
+            for (int i=this.shownShapes.size()-1;i>=0;i--)
+            {
+                this.shownShapes.get(i).draw( g2,true);
+            }
+        }
     }
         public class SelectListener implements MouseListener
     {
