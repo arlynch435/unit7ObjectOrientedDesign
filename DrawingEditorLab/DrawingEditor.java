@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 public class DrawingEditor extends JFrame
 {
     /** description of instance variable x (add comment for each instance variable) */
-    private static final int FRAME_WIDTH=600;
+    private static final int FRAME_WIDTH=1000;
     private static final int FRAME_HEIGHT=800;
 
     /**
@@ -15,6 +15,7 @@ public class DrawingEditor extends JFrame
         super();
         this.setSize(FRAME_WIDTH,FRAME_HEIGHT);
         DrawingPanel canvas=new DrawingPanel();
+        canvas.setSize(canvas.getPreferredSize());
         ControlPanel controls=new ControlPanel(canvas);
         this.setLayout(new BorderLayout());
         this.add(canvas,BorderLayout.NORTH);

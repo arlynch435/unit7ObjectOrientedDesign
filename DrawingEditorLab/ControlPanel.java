@@ -1,6 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -13,9 +15,9 @@ import java.awt.Color;
 public class ControlPanel extends JPanel
 {
     /** description of instance variable x (add comment for each instance variable) */
-    private JButton color;
-    private JButton circle;
-    private JButton square;
+    private JButton pickColor;
+    private JButton newCircle;
+    private JButton newSquare;
     private JPanel colorDisplay;
     private DrawingPanel canvas;
 
@@ -26,37 +28,40 @@ public class ControlPanel extends JPanel
     {
         super();
         this.canvas=d;
-        this.color=new JButton("Pick Color");
+        this.pickColor=new JButton("Pick Color");
         this.colorDisplay=new JPanel();
-        //this.colorDisplay.setBackgroundColor(this.canvas.getColor());
-        this.circle=new JButton("Add Circle");
-        this.square=new JButton("Add Square");
+        this.colorDisplay.setBackground(this.canvas.getColor());
+        this.newCircle=new JButton("Add Circle");
+        this.newSquare=new JButton("Add Square");
         ClickListener listener=new ClickListener();
-        this.color.addActionListener(listener);
-        this.circle.addActionListener(listener);
-        this.square.addActionListener(listener);
-        this.add(this.color);
+        this.pickColor.addActionListener(listener);
+        this.newCircle.addActionListener(listener);
+        this.newSquare.addActionListener(listener);
+        this.add(this.pickColor);
         this.add(this.colorDisplay);
-        this.add(this.circle);
-        this.add(this.square);
+        this.add(this.newCircle);
+        this.add(this.newSquare);
     }
         public class ClickListener implements ActionListener
     {
         
         public void actionPerformed(ActionEvent event)
         {
-            System.out.println(event.getActionCommand()+" was pressed!");
+            //System.out.println(event.getActionCommand()+" was pressed!");
             if ("Pick Color".equals(event.getActionCommand()))
             {
                 canvas.pickColor();
+                colorDisplay.setBackground(canvas.getColor());
             }
             if ("Add Circle".equals(event.getActionCommand()))
             {
                 canvas.addCircle();
+                canvas.repaint();
             }
             if ("Add Square".equals(event.getActionCommand()))
             {
                 canvas.addSquare();
+                canvas.repaint();
             }
         }
     
