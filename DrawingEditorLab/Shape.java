@@ -31,7 +31,7 @@ public abstract class Shape
     }
     public void move (double x, double y)
     {
-        this.center.setLocation(this.center.getX()+x,this.center.getY()+y);
+        this.center.setLocation(x,y);
     }
     public void setRadius(double r)
     {

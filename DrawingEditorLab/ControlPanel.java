@@ -52,6 +52,7 @@ public class ControlPanel extends JPanel
             {
                 canvas.pickColor();
                 colorDisplay.setBackground(canvas.getColor());
+                colorDisplay.repaint();
             }
             if ("Add Circle".equals(event.getActionCommand()))
             {
