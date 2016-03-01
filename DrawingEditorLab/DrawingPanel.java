@@ -28,6 +28,7 @@ public class DrawingPanel extends JPanel
     private int activeShape;
     private boolean isShapePicked;
     private Color shapeColor;
+    private boolean changeRadius;
 
     /**
      * Default constructor for objects of class DrawingPanel
@@ -35,12 +36,12 @@ public class DrawingPanel extends JPanel
     public DrawingPanel()
     {
         super();
-         this.select=new SelectListener();
-         this.move=new DragListener();
+        this.select=new SelectListener();
+        this.move=new DragListener();
         //this.compass=new ArrowListener();
         this.setBackground(Color.WHITE);
         this.shownShapes=new ArrayList<Shape>();
-        this.activeShape=0;
+        this.activeShape=-1;
         this.isShapePicked=false;
         this.shapeColor=Color.BLUE;
         this.addMouseListener(this.select);
@@ -114,6 +115,7 @@ public class DrawingPanel extends JPanel
           double yPos=event.getY();
           Point2D.Double mousePos=new Point2D.Double(xPos,yPos);
           int i=shownShapes.size()-1;
+          isShapePicked=false;
           while (isShapePicked==false&&i>=0)
           {
               if (shownShapes.get(i).isInside(mousePos))
@@ -123,26 +125,30 @@ public class DrawingPanel extends JPanel
                 }
                 else
                 {
-                    isShapePicked=false;
-                    i--;
+                    i=i-1;
                     activeShape=-1;
                 }
            }
            repaint();
         }
-        public void	mouseEntered(MouseEvent event)
+        public void mouseEntered(MouseEvent event)
         {
           // Invoked when the mouse enters a component.
         }
-        public void	mouseExited(MouseEvent event)
+        public void mouseExited(MouseEvent event)
         {
           // Invoked when the mouse exits a component.
         }
-        public void	mousePressed(MouseEvent event)
+        public void mousePressed(MouseEvent event)
         {
           // Invoked when a mouse button has been pressed on a component.
+          double xPos=event.getX();
+          double yPos=event.getY();
+          Point2D.Double mousePos=new Point2D.Double(xPos,yPos);
+          if (isShapePicked)
+             changeRadius=shownShapes.get(activeShape).isOnBorder(mousePos);
         }
-        public void	mouseReleased(MouseEvent event)
+        public void mouseReleased(MouseEvent event)
         {
           // Invoked when a mouse button has been released on a component.
         }
@@ -154,19 +160,40 @@ public class DrawingPanel extends JPanel
         public void mouseDragged(MouseEvent event)
         {
             //use this one
+            double xPos=event.getX();
+            double yPos=event.getY();
+            Point2D.Double mousePos=new Point2D.Double(xPos,yPos);
             select.mouseClicked(event);
-            shownShapes.get(activeShape).move(event.getX(),event.getY());
+            if (isShapePicked&&!changeRadius)
+            {
+               shownShapes.get(activeShape).move(event.getX(),event.getY());
+            }
+            else if (isShapePicked&&changeRadius)
+            {
+                shownShapes.get(activeShape).setRadius(Math.abs(shownShapes.get(activeShape).
+                                                    getCenter().distance(mousePos)));
+            }
             repaint();
         }
         public void mouseMoved(MouseEvent event)
         {
         }
     }
-//         public class ArrowListener implements KeyListener
-//     {
-//         
-// 
-//     
-//     }
+        public class ArrowListener implements KeyListener
+    {
+       public void  keyPressed(KeyEvent event)
+       {
+           //Invoked when a key has been pressed.
+       }
+       public void  keyReleased(KeyEvent event)
+       {
+           //Invoked when a key has been released.
+        }
+       public void  keyTyped(KeyEvent event)
+       {
+           //Invoked when a key has been typed.
+        }
+
+    }
 
 }

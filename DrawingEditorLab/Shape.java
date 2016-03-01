@@ -39,21 +39,22 @@ public abstract class Shape
     }
     public boolean isInside(Point2D.Double point)
     {
-        double EPSILON=1e-6;
         if (point.distance(this.center)<=this.radius)
         {
             return true;
         }
-        return false;
+        else
+            return false;
     }
     public boolean isOnBorder(Point2D.Double point)
     {
         double EPSILON=1e-6;
-        if (point.distance(this.center)-this.radius<=EPSILON)
+        if (Math.abs(point.distance(this.center)-this.radius)<=EPSILON)
         {
             return true;
         }
-        return false;
+        else
+            return false;
     }
     public abstract void draw(Graphics2D g2, boolean filled);
 }
