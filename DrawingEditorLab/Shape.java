@@ -48,8 +48,9 @@ public abstract class Shape
     }
     public boolean isOnBorder(Point2D.Double point)
     {
-        double EPSILON=1e-6;
-        if (Math.abs(point.distance(this.center)-this.radius)<=EPSILON)
+        double EPSILON=1e-3;
+        double distance=Math.abs(point.distance(this.center));
+        if (Math.abs(distance-this.radius)<=EPSILON)
         {
             return true;
         }
