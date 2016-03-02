@@ -40,6 +40,7 @@ public class DrawingPanel extends JPanel
         this.select=new SelectListener();
         this.move=new DragListener();
         this.compass=new ArrowListener();
+        this.requestFocusInWindow();
         this.setBackground(Color.WHITE);
         this.shownShapes=new ArrayList<Shape>();
         this.activeShape=-1;
@@ -112,7 +113,20 @@ public class DrawingPanel extends JPanel
         public void mouseClicked(MouseEvent event)
         {
           // Invoked when the mouse button has been clicked (pressed and released) on a component.
-          double xPos=event.getX();
+        }
+        public void mouseEntered(MouseEvent event)
+        {
+          // Invoked when the mouse enters a component.
+
+        }
+        public void mouseExited(MouseEvent event)
+        {
+          // Invoked when the mouse exits a component.
+        }
+        public void mousePressed(MouseEvent event)
+        {
+          // Invoked when a amouse button has been pressed on a component.
+           double xPos=event.getX();
           double yPos=event.getY();
           Point2D.Double mousePos=new Point2D.Double(xPos,yPos);
           int i=shownShapes.size()-1;
@@ -130,25 +144,10 @@ public class DrawingPanel extends JPanel
                     activeShape=-1;
                 }
            }
+           requestFocusInWindow();
            repaint();
-        }
-        public void mouseEntered(MouseEvent event)
-        {
-          // Invoked when the mouse enters a component.
-
-        }
-        public void mouseExited(MouseEvent event)
-        {
-          // Invoked when the mouse exits a component.
-        }
-        public void mousePressed(MouseEvent event)
-        {
-          // Invoked when a mouse button has been pressed on a component.
-          double xPos=event.getX();
-          double yPos=event.getY();
-          Point2D.Double mousePos=new Point2D.Double(xPos,yPos);
            if (isShapePicked)
-             changeRadius=shownShapes.get(activeShape).isOnBorder(mousePos);
+             changeRadius=shownShapes.get(shownShapes.size()-1).isOnBorder(mousePos);
         }
         public void mouseReleased(MouseEvent event)
         {
@@ -165,18 +164,19 @@ public class DrawingPanel extends JPanel
             double xPos=event.getX();
             double yPos=event.getY();
             Point2D.Double mousePos=new Point2D.Double(xPos,yPos);
-            if(isShapePicked)
-               shownShapes.get(activeShape).move(event.getX(),event.getY());
+            select.mousePressed(event);
+//             if(isShapePicked)
+//                shownShapes.get(shownShapes.size()-1).move(event.getX(),event.getY());
             
-//             if (isShapePicked&&!changeRadius)
-//             {
-//                shownShapes.get(activeShape).move(event.getX(),event.getY());
-//             }
-//             else if (isShapePicked&&changeRadius)
-//             {
-//                 double distance=Math.abs(shownShapes.get(activeShape).getCenter().distance(mousePos));
-//                 shownShapes.get(activeShape).setRadius(distance);
-//             }
+            if (isShapePicked&&!changeRadius)
+            {
+               shownShapes.get(activeShape).move(event.getX(),event.getY());
+            }
+            else if (isShapePicked&&changeRadius)
+            {
+                double distance=Math.abs(shownShapes.get(activeShape).getCenter().distance(mousePos));
+                shownShapes.get(activeShape).setRadius(distance);
+            }
             repaint();
         }
         public void mouseMoved(MouseEvent event)
@@ -193,19 +193,19 @@ public class DrawingPanel extends JPanel
                Point2D.Double center=shownShapes.get(activeShape).getCenter();
                if (event.getKeyCode()==KeyEvent.VK_W)
                {
-                   shownShapes.get(activeShape).move(center.getX(),center.getY()-5);
+                   shownShapes.get(shownShapes.size()-1).move(center.getX(),center.getY()-5);
                 }
                else if (event.getKeyCode()==KeyEvent.VK_S)
                {
-                   shownShapes.get(activeShape).move(center.getX(),center.getY()+5);
+                   shownShapes.get(shownShapes.size()-1).move(center.getX(),center.getY()+5);
                 }
                else if (event.getKeyCode()==KeyEvent.VK_A)
                {
-                   shownShapes.get(activeShape).move(center.getX()+5,center.getY());
+                   shownShapes.get(shownShapes.size()-1).move(center.getX()-5,center.getY());
                 }
                else if (event.getKeyCode()==KeyEvent.VK_D)
                {
-                   shownShapes.get(activeShape).move(center.getX()-5,center.getY());
+                   shownShapes.get(shownShapes.size()-1).move(center.getX()+5,center.getY());
                 }
                repaint();
             }
