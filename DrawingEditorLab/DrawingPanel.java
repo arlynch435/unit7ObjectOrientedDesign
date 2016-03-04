@@ -83,6 +83,7 @@ public class DrawingPanel extends JPanel
         double y=this.getPreferredSize().getHeight()/2;
         Point2D.Double center= new Point2D.Double(x,y);
         Circle child=new Circle(center,50,this.getColor());
+        this.activeShape=this.shownShapes.size()-1;
         this.shownShapes.add(child);
     }
     public void addSquare()
@@ -91,6 +92,7 @@ public class DrawingPanel extends JPanel
         double y=this.getPreferredSize().getHeight()/2;
         Point2D.Double center= new Point2D.Double(x,y);
         Square child=new Square(center,50,this.getColor());
+        this.activeShape=this.shownShapes.size()-1;
         this.shownShapes.add(child);
     }
     public void paintComponent(Graphics g)
@@ -205,6 +207,7 @@ public class DrawingPanel extends JPanel
                {
                    shownShapes.get(shownShapes.size()-1).move(center.getX()+5,center.getY());
                 }
+               activeShape=shownShapes.size()-1;
                repaint();
             }
        }
