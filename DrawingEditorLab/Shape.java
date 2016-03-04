@@ -46,16 +46,5 @@ public abstract class Shape
         else
             return false;
     }
-    public boolean isOnBorder(Point2D.Double point)
-    {
-        double EPSILON=1e-3;
-        double distance=Math.abs(point.distance(this.center));
-        if (Math.abs(distance-this.radius)<=EPSILON)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
     public abstract void draw(Graphics2D g2, boolean filled);
 }

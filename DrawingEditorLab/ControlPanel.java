@@ -20,6 +20,7 @@ public class ControlPanel extends JPanel
     private JButton newSquare;
     private JPanel colorDisplay;
     private DrawingPanel canvas;
+    private JButton remove;
 
     /**
      * Default constructor for objects of class ControlPanel
@@ -29,11 +30,13 @@ public class ControlPanel extends JPanel
         super();
         this.canvas=d;
         this.pickColor=new JButton("Pick Color");
+        this.remove=new JButton("Remove");
         this.colorDisplay=new JPanel();
         this.colorDisplay.setBackground(this.canvas.getColor());
         this.newCircle=new JButton("Add Circle");
         this.newSquare=new JButton("Add Square");
         ClickListener listener=new ClickListener();
+        this.remove.addActionListener(listener);
         this.pickColor.addActionListener(listener);
         this.newCircle.addActionListener(listener);
         this.newSquare.addActionListener(listener);
@@ -41,6 +44,7 @@ public class ControlPanel extends JPanel
         this.add(this.colorDisplay);
         this.add(this.newCircle);
         this.add(this.newSquare);
+        this.add(this.remove);
     }
         public class ClickListener implements ActionListener
     {
@@ -62,6 +66,11 @@ public class ControlPanel extends JPanel
             if ("Add Square".equals(event.getActionCommand()))
             {
                 canvas.addSquare();
+                canvas.repaint();
+            }
+            if ("Remove".equals(event.getActionCommand()))
+            {
+                canvas.removeShape();
                 canvas.repaint();
             }
         }

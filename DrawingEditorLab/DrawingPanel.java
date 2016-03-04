@@ -50,6 +50,14 @@ public class DrawingPanel extends JPanel
         this.addMouseMotionListener(this.move);
         this.addKeyListener(this.compass);
     }
+    public void removeShape()
+    {
+        if(this.isShapePicked)
+        {
+            this.shownShapes.remove(this.shownShapes.size()-1);
+            this.isShapePicked=false;
+        }
+    }
     public Color getColor()
     {  
         return this.shapeColor;
@@ -116,17 +124,18 @@ public class DrawingPanel extends JPanel
         }
         public void mouseEntered(MouseEvent event)
         {
-          // Invoked when the mouse enters a component.
-          requestFocusInWindow();
+           requestFocusInWindow();
+            // Invoked when the mouse enters a component.
         }
         public void mouseExited(MouseEvent event)
         {
-          // Invoked when the mouse exits a component.
+            // Invoked when the mouse exits a component.
         }
         public void mousePressed(MouseEvent event)
         {
           // Invoked when a amouse button has been pressed on a component.
-           double xPos=event.getX();
+
+          double xPos=event.getX();
           double yPos=event.getY();
           Point2D.Double mousePos=new Point2D.Double(xPos,yPos);
           int i=shownShapes.size()-1;
@@ -144,10 +153,7 @@ public class DrawingPanel extends JPanel
                     activeShape=-1;
                 }
            }
-           
            repaint();
-           if (isShapePicked)
-             changeRadius=shownShapes.get(shownShapes.size()-1).isOnBorder(mousePos);
         }
         public void mouseReleased(MouseEvent event)
         {
@@ -165,19 +171,9 @@ public class DrawingPanel extends JPanel
             double yPos=event.getY();
             Point2D.Double mousePos=new Point2D.Double(xPos,yPos);
             select.mousePressed(event);
-//             if(isShapePicked)
-//                shownShapes.get(shownShapes.size()-1).move(event.getX(),event.getY());
-            
-            if (isShapePicked&&!changeRadius)
-            {
-               shownShapes.get(shownShapes.size()-1).move(event.getX(),event.getY());
-            }
-            else if (isShapePicked&&changeRadius)
-            {
-                double distance=Math.abs(shownShapes.get(shownShapes.size()-1).getCenter()
-                                         .distance(mousePos));
-                shownShapes.get(shownShapes.size()-1).setRadius(distance);
-            }
+            if(isShapePicked)
+                shownShapes.get(shownShapes.size()-1).move(event.getX(),event.getY());
+
             repaint();
         }
         public void mouseMoved(MouseEvent event)
@@ -192,19 +188,20 @@ public class DrawingPanel extends JPanel
            if (isShapePicked)
            {
                Point2D.Double center=shownShapes.get(shownShapes.size()-1).getCenter();
-               if (event.getKeyCode()==KeyEvent.VK_W)
+               int key =event.getKeyCode();
+               if (key==KeyEvent.VK_W)
                {
                    shownShapes.get(shownShapes.size()-1).move(center.getX(),center.getY()-5);
                 }
-               else if (event.getKeyCode()==KeyEvent.VK_S)
+               else if (key==KeyEvent.VK_S)
                {
                    shownShapes.get(shownShapes.size()-1).move(center.getX(),center.getY()+5);
                 }
-               else if (event.getKeyCode()==KeyEvent.VK_A)
+               else if (key==KeyEvent.VK_A)
                {
                    shownShapes.get(shownShapes.size()-1).move(center.getX()-5,center.getY());
                 }
-               else if (event.getKeyCode()==KeyEvent.VK_D)
+               else if (key==KeyEvent.VK_D)
                {
                    shownShapes.get(shownShapes.size()-1).move(center.getX()+5,center.getY());
                 }

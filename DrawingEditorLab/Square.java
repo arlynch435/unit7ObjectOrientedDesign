@@ -20,9 +20,9 @@ public class Square extends Shape
 
     public void draw(Graphics2D g2, boolean filled)
     {
-        Rectangle2D.Double square=new Rectangle2D.Double(this.getCenter().getX()-this.getRadius(),
-                                                     this.getCenter().getY()-this.getRadius(),
-                                                     this.getRadius()*2,this.getRadius()*2);
+        Rectangle2D.Double square=new Rectangle2D.Double(this.getCenter().getX()-(this.getRadius())/Math.sqrt(2),
+                                                     this.getCenter().getY()-(this.getRadius())/Math.sqrt(2),
+                                                     (this.getRadius()*2)/Math.sqrt(2),(this.getRadius()*2)/Math.sqrt(2));
         g2.setColor(this.getShade());
         g2.draw(square);
         if (filled)
